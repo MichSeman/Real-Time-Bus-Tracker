@@ -14,7 +14,6 @@ const busStops = [
   [-71.118625, 42.374863],
 ];
 
-// TODO: add your own access token
 mapboxgl.accessToken = 'pk.eyJ1IjoibWljaGVsbGVzZW1hbiIsImEiOiJja3dqdTY4Y3cxbHFsMnZ1dDZueXZqNzRpIn0.l4TVsqjd4obmmp9GtkkJDg';
 
 // This is the map instance
@@ -39,7 +38,52 @@ function move() {
     move();
   }, 1000);
 }
+const geojson = {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [-71.116943, 42.374443]
+        },
+        properties: {
+          title: 'Mapbox',
+          description: 'Harvard'
+        }
+      },
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [-71.092003, 42.360001]
+    
+        },
+        properties: {
+          title: 'Mapbox',
+          description: 'MIT'
+        }
+      }
+    ]
+  };
 
+// add city markers to map
+for (const feature of geojson.features) {
+  // create a HTML element for each feature
+  const el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+  .setLngLat(feature.geometry.coordinates)
+  .setPopup(
+    new mapboxgl.Popup({ offset: 25 }) // add popups
+      .setHTML(
+        `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+      )
+  )
+  .addTo(map); 
+}
 
 if (typeof module !== 'undefined') {
   module.exports = { move };
