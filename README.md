@@ -10,5 +10,5 @@ Track the bus route from MIT to Harvard via bus icons along this map. The map sh
 	3.	Open the index file using a browser
 	4.	Using the button, start the bus on it's route
 
-## Future improvement
+## Future improvements
 I'd like to add more pop-up features to the map as you travel along the bus route. 
